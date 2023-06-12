@@ -1,0 +1,169 @@
+/* Colors:
+Lavender Pink #ffb2e6
+Helotrope #d972ff
+VeronicaBlue #8447ff */
+
+/* more colors:
+french gray: # b8b8d1
+ultra violet: #5b5f97
+yellow xanthous #ffc145 */
+
+
+
+
+
+/* MODAL */  /* MODAL */  /* MODAL */  /* MODAL */  /* MODAL */
+
+.modal-content {
+    width: auto;
+    height: auto;
+    min-width: 500px;
+    min-height: 500px;
+    border: 10px solid black;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: lightgreen;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .modal-content label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .modal-content input {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+  }
+  
+  .modal-button{
+    display: block;
+    margin: 20px auto;
+  }
+
+  .modal-content img {
+    width: 150px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .modal-content img:hover {
+    transform: scale(6);
+  }
+
+
+  /* NAVBAR */ /* NAVBAR */ /* NAVBAR */ /* NAVBAR */ /* NAVBAR */
+
+
+.navbar {
+    background-color: #5b5f97;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .logo {
+    margin-right: 2rem;
+    width: 100px;
+  }
+  
+  .company-name {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .button {
+    margin-right: 1rem;
+  }
+  
+  .button-container {
+    display: flex;
+    align-items: center;
+  }
+
+
+
+/* TABLE */ /* TABLE */ /* TABLE */ /* TABLE */ /* TABLE */ /* TABLE */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: lightslategrey;
+    font-weight: bold;
+  }
+  
+  tr:nth-child(even) {
+    background-color: lightslategray;
+  }
+  
+  tr:hover {
+    background-color: #e6e6e6;
+    color: black;
+  }
+
+
+  /* UPLOADBAR */ /* UPLOADBAR */ /* UPLOADBAR */ /* UPLOADBAR */ /* UPLOADBAR */
+
+.uploadbar {
+    background-color: darkgreen;
+  }
+  
+  .uploadbar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+
+/* TABBAR */ /* TABBAR */ /* TABBAR */ /* TABBAR */ /* TABBAR */ /* TABBAR */
+
+
+.tabbar {
+    background-color: #4C907C;
+  }
+  
+  .tabbar-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    margin: 0 auto;
+    max-width: 90%;
+    width: 100%;
+  }
+  
+  .tabbar-container p:not(:last-child) {
+    margin-right: 1rem;
+  }
+
+  .tabbar-container p:last-child {
+    margin-left: auto;
+  }
