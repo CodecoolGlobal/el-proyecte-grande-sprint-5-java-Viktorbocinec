@@ -35,7 +35,7 @@ public class AuthService {
         return new TokenDto(username, token);
     }
 
-    public UserDataDto signUp(UserDataDto userDataDto) {
+    public UserDataDto register(UserDataDto userDataDto) {
         if (userDetailsManager.userExists(userDataDto.username())) {
             return null;
         }

@@ -30,13 +30,6 @@ export default function QuestionUpload() {
       formData.append('image', selectedFile);
       formData.append('category', category.valueOf());
 
-      // const formData = {
-      //   questionText: questionText,
-      //   answerText: answerText,
-      //   image: selectedFile,
-      //   category: category
-      // }
-
       for (const value of formData.values()) {
         console.log(value)
       }

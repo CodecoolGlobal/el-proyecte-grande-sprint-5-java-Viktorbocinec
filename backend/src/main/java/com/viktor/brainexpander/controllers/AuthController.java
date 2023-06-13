@@ -28,8 +28,8 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public UserDataDto signUp(@RequestBody UserDataDto loginData) {
-        UserDataDto userDataDto = authService.signUp(loginData);
+    public UserDataDto register(@RequestBody UserDataDto loginData) {
+        UserDataDto userDataDto = authService.register(loginData);
         if (userDataDto == null) throw new UserAlreadyExistsError("User already exists!");
         return userDataDto;
     }

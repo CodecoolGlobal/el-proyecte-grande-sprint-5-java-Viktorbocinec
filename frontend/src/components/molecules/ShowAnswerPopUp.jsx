@@ -25,6 +25,7 @@ export default function ShowAnswerPopUp({answerText, answerImage, questionId, qu
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': "Bearer " + localStorage.getItem("token")
             },
             body: JSON.stringify(updatedQuestion),
         })

@@ -51,6 +51,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/questions/**").hasRole("ROLE_USER")
                         .requestMatchers(HttpMethod.POST, "/questions/**").hasRole("ROLE_USER")
                         .requestMatchers(HttpMethod.DELETE, "/questions/**").hasRole("ROLE_USER")
+                        .requestMatchers(HttpMethod.PUT, "/questions/**").hasRole("ROLE_USER")
                         .requestMatchers("/questions/**").hasRole("ROLE_ADMIN")
                         .requestMatchers("/questions/**").hasRole("ROLE_USER")
                         .requestMatchers("/auth/**").permitAll()

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 import '../../General.css'
 import { Buffer } from "buffer";
@@ -7,6 +8,8 @@ export default function LoginPopUp(){
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const [loggedIn, setLoggedIn] = useState(false)
 
     const openModal = () => {
         setModalIsOpen(true);
@@ -42,11 +45,19 @@ export default function LoginPopUp(){
           }
         })
         .then(data => {
+          if (localStorage.getItem("token")) {
+            console.log("Already logged in"); //delete later
+            setLoggedIn(true);
+            setPassword("");
+            setUsername("");
+            return;
+          }
           console.log(data);//to delete
           localStorage.setItem("token", data.token);
           localStorage.setItem("username", data.username);
           console.log(data.token);//to delete
           closeModal();
+          navigate('/questions')
         })
         .catch(error => {
           console.error(error);
@@ -61,14 +72,15 @@ export default function LoginPopUp(){
                 <form>
                     <label>
                         User Name:
-                        <input placeholder="Username" type="text" onChange={ (event) => setUsername(event.target.value) }/>
+                        <input placeholder="Username" type="text" value={username} onChange={ (event) => setUsername(event.target.value) }/>
                     </label>
                     <label>
                         Password:
-                        <input placeholder="Password" type="password" onChange={ (event) => setPassword(event.target.value) }/>
+                        <input placeholder="Password" type="password" value={password} onChange={ (event) => setPassword(event.target.value) }/>
                     </label>
                 </form>
                 <button onClick={handleLogin} className="modal-button">Login</button>
+                {loggedIn && (<p className='red'>Already logged in</p>)}
             </Modal>
         </div>
     );

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import '../../General.css'
 import Logo from '../../assets/brain_expander_logo_transparent.png'
 import LoginPopUp from "./LoginPopUp";
+import LogoutButton from "./LogoutButton";
 
 
 
@@ -22,7 +23,7 @@ const NavigationBar = ({showRegisterButton, showLoginButton, showLogoutButton}) 
           <div className="button-container">
             {showLoginButton && (<div className="button"><LoginPopUp /></div>)}
             {showRegisterButton && (<div className="button"><Link to="/register"><button className="button">Register</button></Link></div>)}
-            {showLogoutButton && (<div className="button"><button className="button">Logout</button></div>)}
+            {showLogoutButton && (<div className="button"><LogoutButton /></div>)}
           </div>
         </div>
       </div>
