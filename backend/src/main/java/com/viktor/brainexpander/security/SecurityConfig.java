@@ -6,6 +6,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import com.viktor.brainexpander.repositories.UserRepository;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -48,12 +51,12 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .headers().frameOptions().sameOrigin().and()
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET, "/questions/**").hasRole("ROLE_USER")
-                        .requestMatchers(HttpMethod.POST, "/questions/**").hasRole("ROLE_USER")
-                        .requestMatchers(HttpMethod.DELETE, "/questions/**").hasRole("ROLE_USER")
-                        .requestMatchers(HttpMethod.PUT, "/questions/**").hasRole("ROLE_USER")
-                        .requestMatchers("/questions/**").hasRole("ROLE_ADMIN")
-                        .requestMatchers("/questions/**").hasRole("ROLE_USER")
+                        .requestMatchers(HttpMethod.GET, "/questions/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/questions/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.DELETE, "/questions/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.PUT, "/questions/**").hasRole("USER")
+                        .requestMatchers("/questions/**").hasRole("ADMIN")
+                        .requestMatchers("/questions/**").hasRole("USER")
                         .requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -76,20 +79,6 @@ public class SecurityConfig {
         return source;
     }
 
-    @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user = User.builder()
-                .username("user")
-                .password(encoder().encode("user"))
-                .roles("USER")
-                .build();
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(encoder().encode("admin"))
-                .roles("USER", "ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }
 
     @Bean
     public PasswordEncoder encoder() {
@@ -119,6 +108,7 @@ public class SecurityConfig {
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
         return jwtAuthenticationConverter;
     }
+
 
 
 

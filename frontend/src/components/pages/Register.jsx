@@ -10,7 +10,7 @@ export default function Register(){
       e.preventDefault();
   
       const user = {
-          userName: userName,
+          username: userName,
           password: password
       };
 

@@ -3,25 +3,25 @@ package com.viktor.brainexpander.service;
 import com.viktor.brainexpander.dto.TokenDto;
 import com.viktor.brainexpander.dto.UserDataDto;
 import com.viktor.brainexpander.security.JwtGenerator;
+import com.viktor.brainexpander.security.UserImplementationService;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.viktor.brainexpander.model.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class AuthService {
 
     private final JwtGenerator jwtGenerator;
 
-    private final InMemoryUserDetailsManager userDetailsManager;
-
+    private final UserImplementationService userImplementationService;
     private final PasswordEncoder encoder;
 
-    public AuthService(JwtGenerator jwtGenerator, InMemoryUserDetailsManager userDetailsManager, PasswordEncoder encoder) {
+    public AuthService(JwtGenerator jwtGenerator, UserImplementationService userImplementationService, PasswordEncoder encoder) {
         this.jwtGenerator = jwtGenerator;
-        this.userDetailsManager = userDetailsManager;
+        this.userImplementationService = userImplementationService;
         this.encoder = encoder;
     }
 
@@ -36,16 +36,15 @@ public class AuthService {
     }
 
     public UserDataDto register(UserDataDto userDataDto) {
-        if (userDetailsManager.userExists(userDataDto.username())) {
+        if (userImplementationService.userExists(userDataDto.username())) {
             return null;
         }
 
-        UserDetails user = User.builder()
-                .username(userDataDto.username())
-                .password(encoder.encode(userDataDto.password()))
-                .roles("USER")
-                .build();
-        userDetailsManager.createUser(user);
+        User user = new User();
+        user.setUsername(userDataDto.username());
+        user.setPassword(encoder.encode(userDataDto.password()));
+        user.setAuthorities(Set.of("USER"));
+        userImplementationService.createUser(user);
         return userDataDto;
     }
 
