@@ -155,23 +155,30 @@ table {
 
 
 .tabbar {
-    background-color: #4C907C;
-  }
-  
-  .tabbar-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    margin: 0 auto;
-    max-width: 90%;
-    width: 100%;
-  }
-  
-  .tabbar-container p:not(:last-child) {
-    margin-right: 1rem;
-  }
+  background-color: #4C907C;
+}
 
-  .tabbar-container p:last-child {
-    margin-left: auto;
-  }
+.tabbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 0 auto;
+  max-width: 90%;
+  width: 100%;
+}
+
+.left-section, .middle-section, .right-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.tabbar-container p:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.middle-section p {
+  text-align: center;
+}

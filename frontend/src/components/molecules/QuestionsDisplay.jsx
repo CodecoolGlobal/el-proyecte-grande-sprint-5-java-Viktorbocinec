@@ -4,18 +4,53 @@ import ShowAnswerPopUp from "./ShowAnswerPopUp";
 
 export default function QuestionsDisplay(){
     const [questions, setQuestions] = useState([]);
+    const loggedInUser = localStorage.getItem("username");
 
-    useEffect(() => {
-        fetch('http://localhost:8080/questions',{
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': "Bearer " + localStorage.getItem("token")
+
+    // useEffect(() => {
+    //     fetch('http://localhost:8080/questions',{
+    //     method: 'GET',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': "Bearer " + localStorage.getItem("token")
+    //     }
+    //   })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       const username = localStorage.getItem("username");
+    //       const userQuestions = data.filter(question => question.username === username);
+    //       setQuestions(userQuestions);
+    //     })
+    //     .catch(error => console.log(error));
+    // }, []);
+    
+    const fetchQuestions = async (username, category) => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/questions?${username ? `username=${username}` : ''}${category ? `&category=${category}` : ''}`, 
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': "Bearer " + localStorage.getItem("token")
+            }
+          }
+        );
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      })
-        .then(response => response.json())
-        .then(data => setQuestions(data))
-        .catch(error => console.log(error));
+  
+        const data = await response.json();
+        setQuestions(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    useEffect(() => {
+      const username = localStorage.getItem("username");
+      fetchQuestions(username);
     }, []);
 
     const deleteQuestion = (id) => {
@@ -37,6 +72,12 @@ export default function QuestionsDisplay(){
     }
 
     return(
+      <>
+            <button onClick={() => fetchQuestions(loggedInUser)}>All</button>
+      <button onClick={() => fetchQuestions(loggedInUser, 'needsWork')}>Needs Work</button>
+      <button onClick={() => fetchQuestions(loggedInUser, 'mastered')}>Mastered</button>
+      <button onClick={() => fetchQuestions(loggedInUser, 'toDo')}>To Do</button>
+
         <table>
         <thead>
           <tr>
@@ -54,6 +95,6 @@ export default function QuestionsDisplay(){
           ))}
         </tbody>
       </table>
-
+      </>
     );
 };

@@ -8,6 +8,8 @@ import LogoutButton from "./LogoutButton";
 
 
 
+
+
 const NavigationBar = ({showRegisterButton, showLoginButton, showLogoutButton}) => {  
     return (
       <div className="navbar">

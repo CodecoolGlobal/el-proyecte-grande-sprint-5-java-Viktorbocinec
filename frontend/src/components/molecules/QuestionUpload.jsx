@@ -5,7 +5,8 @@ export default function QuestionUpload() {
     const [selectedFile, setSelectedFile] = useState();
     const [questionText, setQuestionText] = useState("");
     const [answerText, setAnswerText] = useState("");
-    const [category, setCategory] = useState("notDone")
+    const [category, setCategory] = useState("toDo");
+    const [username, setUsername] = useState(localStorage.getItem("username"));
   
     const handleFileChange = (e) => {
       setSelectedFile(e.target.files[0]);
@@ -29,6 +30,7 @@ export default function QuestionUpload() {
       formData.append('answerText', answerText.valueOf());
       formData.append('image', selectedFile);
       formData.append('category', category.valueOf());
+      formData.append('username', username.valueOf());
 
       for (const value of formData.values()) {
         console.log(value)
