@@ -20,7 +20,7 @@ export default function TabBar(){
                     <p className="username-show">{username && username}</p>
                 </div>
                 <div className="right-section">
-                    <p>Coutner</p>
+                    <p>Placeholder</p>
                 </div>
             </div>
         </div>

@@ -41,7 +41,6 @@ export default function QuestionUpload() {
         headers: {
           'Authorization': "Bearer " + localStorage.getItem("token")
         },
-        // body: JSON.stringify(formData)
         body: formData
 
         

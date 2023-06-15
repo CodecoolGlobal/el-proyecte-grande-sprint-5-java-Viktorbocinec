@@ -1,10 +1,12 @@
 import NavigationBar from "../molecules/NavigationBar";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register(){
 
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleRegister = (e) => {
       e.preventDefault();
@@ -30,9 +32,7 @@ export default function Register(){
           return response.json();
       })
       .then(data => {
-
-      //redirect later
-      console.log("works")
+        navigate('/')
       })
       .catch(error => {
           console.error('There has been a problem with your fetch operation:', error);

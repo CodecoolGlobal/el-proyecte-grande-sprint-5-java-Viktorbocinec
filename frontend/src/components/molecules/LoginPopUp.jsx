@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import '../../General.css'
 import { Buffer } from "buffer";
 
+
 export default function LoginPopUp(){
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [username, setUsername] = useState("");

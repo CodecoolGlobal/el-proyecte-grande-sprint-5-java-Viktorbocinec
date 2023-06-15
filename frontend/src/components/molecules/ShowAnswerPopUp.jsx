@@ -70,9 +70,7 @@ export default function ShowAnswerPopUp({answerText, answerImage, questionId, qu
             <button onClick={openModal}>Show Answer</button>
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className='modal-content'> 
                 <h2>Answer</h2>
-                <p>to delete: {questionCategory}</p>
                 <p>{answerText}</p>
-                {/* {answerImage && <p><img src={`http://localhost:8080/images/profile-pic-placeholder.jpg`} alt={questionId} style={{ width: '150px' }} /></p>} */}
                 {answerImage && 
     <p>
         <FetchImage imageName={answerImage} alt={questionId} />

@@ -6,6 +6,7 @@ VeronicaBlue #8447ff */
 /* more colors:
 french gray: # b8b8d1
 ultra violet: #5b5f97
+lighter violet: #787BAD
 yellow xanthous #ffc145 */
 
 
@@ -15,9 +16,11 @@ yellow xanthous #ffc145 */
   color: red;
 }
 
-
-
-
+.username-show{
+  color: #fe9c01;
+  font-size: 18px;
+  font-weight: bold;
+}
 
 
 /* MODAL */  /* MODAL */  /* MODAL */  /* MODAL */  /* MODAL */
@@ -32,7 +35,7 @@ yellow xanthous #ffc145 */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: lightgreen;
+    background-color: #fe9c01;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -71,7 +74,7 @@ yellow xanthous #ffc145 */
 
 
 .navbar {
-    background-color: #5b5f97;
+    background-color: #fe9c01;
   }
   
   .navbar-container {
@@ -111,6 +114,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    background-color: #787BAD;
   }
   
   th, td {
@@ -119,12 +123,12 @@ table {
   }
   
   th {
-    background-color: lightslategrey;
+    background-color: #5b5f97;
     font-weight: bold;
   }
   
   tr:nth-child(even) {
-    background-color: lightslategray;
+    background-color: #5b5f97;
   }
   
   tr:hover {
@@ -136,7 +140,7 @@ table {
   /* UPLOADBAR */ /* UPLOADBAR */ /* UPLOADBAR */ /* UPLOADBAR */ /* UPLOADBAR */
 
 .uploadbar {
-    background-color: darkgreen;
+    background-color: #fe9c01;
   }
   
   .uploadbar-container {
@@ -155,7 +159,8 @@ table {
 
 
 .tabbar {
-  background-color: #4C907C;
+  background-color: #787BAD;
+  height: 70px;
 }
 
 .tabbar-container {
@@ -168,10 +173,24 @@ table {
   width: 100%;
 }
 
-.left-section, .middle-section, .right-section {
+.left-section{
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  flex: 1;
+}
+
+.middle-section{
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1;
+}
+
+.right-section {
+  display: flex;
+  align-items: right;
+  justify-content: right;
   flex: 1;
 }
 
@@ -182,3 +201,34 @@ table {
 .middle-section p {
   text-align: center;
 }
+
+.tabbar-container button:not(:last-child) {
+  margin-right: 10px;
+}
+
+
+/* HOMEPAGE */ /* HOMEPAGE */ /* HOMEPAGE */ /* HOMEPAGE */ /* HOMEPAGE */ 
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* FOOTER */ /* FOOTER */ /* FOOTER */ /* FOOTER */ /* FOOTER */ /* FOOTER */ 
+
+.footer {
+  background-color: #787BAD;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.footer p {
+  margin-right: 20px;
+}
+
+

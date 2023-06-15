@@ -11,6 +11,7 @@ import LogoutButton from "./LogoutButton";
 
 
 const NavigationBar = ({showRegisterButton, showLoginButton, showLogoutButton}) => {  
+    const username = localStorage.getItem("username");
     return (
       <div className="navbar">
         <div className="navbar-container">
@@ -23,9 +24,11 @@ const NavigationBar = ({showRegisterButton, showLoginButton, showLogoutButton}) 
             <h1 className="company-name">Brain Expander</h1>
           </div>
           <div className="button-container">
-            {showLoginButton && (<div className="button"><LoginPopUp /></div>)}
-            {showRegisterButton && (<div className="button"><Link to="/register"><button className="button">Register</button></Link></div>)}
-            {showLogoutButton && (<div className="button"><LogoutButton /></div>)}
+            {!username && <div>{showLoginButton && (<div className="button"><LoginPopUp /></div>)}
+            {showRegisterButton && (<div className="button"><Link to="/register"><button className="button">Register</button></Link></div>)}</div>}
+
+
+            {showLogoutButton && username && (<div className="button"><LogoutButton /></div>)}
           </div>
         </div>
       </div>
