@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from 'react-modal';
 import '../../General.css'
 
@@ -41,6 +41,30 @@ export default function ShowAnswerPopUp({answerText, answerImage, questionId, qu
         });
     };
 
+    const FetchImage = ({imageName, alt })  => {
+        const [imageUrl, setImageUrl] = useState(null);
+    
+        useEffect(() => {
+            fetch(`http://localhost:8080/images/${imageName}`, {
+                headers: {
+                    'Authorization': "Bearer " + localStorage.getItem("token")
+                }
+            })
+            .then(response => response.blob())
+            .then(images => {
+                // Then create a local URL for that image and print it 
+                let imageSrc = URL.createObjectURL(images);
+                setImageUrl(imageSrc);
+            })
+        }, [imageName]);
+    
+        return (
+            <img src={imageUrl} alt={alt} style={{ width: '150px' }} />
+        );
+    }
+
+
+
     return(
         <div>
             <button onClick={openModal}>Show Answer</button>
@@ -48,7 +72,12 @@ export default function ShowAnswerPopUp({answerText, answerImage, questionId, qu
                 <h2>Answer</h2>
                 <p>to delete: {questionCategory}</p>
                 <p>{answerText}</p>
-                {answerImage && <p><img src={`data:image/jpeg;base64,${answerImage}`} alt={questionId} style={{ width: '150px' }} /></p>}
+                {/* {answerImage && <p><img src={`http://localhost:8080/images/profile-pic-placeholder.jpg`} alt={questionId} style={{ width: '150px' }} /></p>} */}
+                {answerImage && 
+    <p>
+        <FetchImage imageName={answerImage} alt={questionId} />
+    </p>
+}
                 <button onClick={() => handleEdit('mastered')} className="modal-button">Mastered</button>
                 <button onClick={() => handleEdit('needsWork')} className="modal-button">Needs Work</button>
             </Modal>

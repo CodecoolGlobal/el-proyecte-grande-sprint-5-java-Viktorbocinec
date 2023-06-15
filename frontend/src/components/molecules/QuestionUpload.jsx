@@ -28,7 +28,7 @@ export default function QuestionUpload() {
       const formData = new FormData();
       formData.append('questionText', questionText.valueOf());
       formData.append('answerText', answerText.valueOf());
-      formData.append('image', selectedFile);
+      formData.append('imagePath', selectedFile);
       formData.append('category', category.valueOf());
       formData.append('username', username.valueOf());
 

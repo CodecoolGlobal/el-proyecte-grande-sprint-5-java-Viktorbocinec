@@ -5,24 +5,6 @@ import ShowAnswerPopUp from "./ShowAnswerPopUp";
 export default function QuestionsDisplay(){
     const [questions, setQuestions] = useState([]);
     const loggedInUser = localStorage.getItem("username");
-
-
-    // useEffect(() => {
-    //     fetch('http://localhost:8080/questions',{
-    //     method: 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': "Bearer " + localStorage.getItem("token")
-    //     }
-    //   })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       const username = localStorage.getItem("username");
-    //       const userQuestions = data.filter(question => question.username === username);
-    //       setQuestions(userQuestions);
-    //     })
-    //     .catch(error => console.log(error));
-    // }, []);
     
     const fetchQuestions = async (username, category) => {
       try {
@@ -50,7 +32,7 @@ export default function QuestionsDisplay(){
   
     useEffect(() => {
       const username = localStorage.getItem("username");
-      fetchQuestions(username);
+      fetchQuestions(username, "toDo");
     }, []);
 
     const deleteQuestion = (id) => {
@@ -90,7 +72,7 @@ export default function QuestionsDisplay(){
             <tr key={question.id}>
               <td>{question.questionText}</td>
               <td><button onClick={() => deleteQuestion(question.id)}>Delete</button>
-              <ShowAnswerPopUp answerText={question.answerText} answerImage ={question.image} questionId={question.id} questionCategory={question.category}/></td>
+              <ShowAnswerPopUp answerText={question.answerText} answerImage ={question.imagePath} questionId={question.id} questionCategory={question.category}/></td>
             </tr>
           ))}
         </tbody>

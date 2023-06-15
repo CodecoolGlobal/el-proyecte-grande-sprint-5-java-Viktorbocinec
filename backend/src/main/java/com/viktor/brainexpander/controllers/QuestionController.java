@@ -2,25 +2,28 @@ package com.viktor.brainexpander.controllers;
 
 import com.viktor.brainexpander.model.Question;
 import com.viktor.brainexpander.service.QuestionService;
-import jakarta.websocket.server.PathParam;
+import com.viktor.brainexpander.service.StorageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("questions")
 public class QuestionController {
 
     private final QuestionService questionService;
+    private final StorageService storageService;
 
-    public QuestionController(QuestionService questionService) {
+    public QuestionController(QuestionService questionService, StorageService storageService) {
         this.questionService = questionService;
+        this.storageService = storageService;
     }
 
 //    @GetMapping
@@ -53,9 +56,9 @@ public class QuestionController {
             @RequestParam("questionText") String questionText,
             @RequestParam("answerText") String answerText,
             @RequestParam("category") String category,
-            @RequestParam(value = "image", required = false) MultipartFile image,
+            @RequestParam(value = "imagePath", required = false) MultipartFile image,
             @RequestParam("username") String username
-    )throws IOException {
+    ) throws IOException {
         LocalDate postDate = LocalDate.now();
 
         Question question = new Question();
@@ -64,7 +67,8 @@ public class QuestionController {
         question.setAnswerText(answerText);
         question.setCategory(category);
         if (image != null && !image.isEmpty()) {
-            question.setImage(image.getBytes());
+            String fileName = storageService.storeFile(image);
+            question.setImagePath(fileName);
         }
         question.setUsername(username);
 

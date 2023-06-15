@@ -21,18 +21,9 @@ public class Question {
 
     private String category;
 
-    @Lob
-    private byte[] image;
+    private String imagePath;
 
     private String username;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public long getId() {
         return id;
@@ -74,11 +65,19 @@ public class Question {
         this.category = category;
     }
 
-    public byte[] getImage() {
-        return image;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
